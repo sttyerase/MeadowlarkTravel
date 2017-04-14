@@ -1,0 +1,28 @@
+{
+  "name": "MeadowlarkTravel",
+  "version": "0.0.0",
+  "description": "Generated with Eclipse npm Tools",
+  "main": "meadowlark.js",
+  "repository": {
+    "type": "git",
+    "url": "/Users/moored7/moored7/Projects/eclipse/MeadowlarkTravel"
+  },
+  "keywords": [
+    "Travel",
+    "Service"
+  ],
+  "scripts": {
+    "test": "echo 'Error: no test specified' && exit 1"
+  },
+  "author": "Ethan Brown",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^2.0.0",
+    "express": "^4.13.4",
+    "express-handlebars": "^3.0.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  }
+}
