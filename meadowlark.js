@@ -12,6 +12,9 @@ app.locals.poopie = 'POOPIE';
 var fortune = require('./lib/fortune.js');
 var showroute = require('./lib/showroute.js');
 var childproc = require('./lib/childprocess.js');
+var util = require('util');
+// FORM PROCESSING WITH BODY-PARSER
+app.use(require('body-parser').urlencoded({ extended: true }));
 
 // set up handlebars view engine
 var handlebars = require('express-handlebars').create({ defaultLayout:'main' });
@@ -55,12 +58,31 @@ app.get('/route', function(req,res){
    res.render('route', { showroute: showroute.getRoute(res)});
 });
 
+//NEWSLETTER FORM PROCESSING
+app.get('/newsletter', function(req, res){
+   // we will learn about CSRF later...for now, we just
+   // provide a dummy value
+   res.render('newsletter', { csrf: 'CSRF token goes here' });
+});
+
+app.get('/thank-you', function(req,res){
+   res.render('thank-you')
+});
+
+app.post('/process', function(req, res){
+   console.log('Form (from querystring): ' + req.query.form);
+   console.log('CSRF token (from hidden form field): ' + req.body._csrf);
+   console.log('Name (from visible form field): ' + req.body.name);
+   console.log('Email (from visible form field): ' + req.body.email);
+   res.redirect(303, '/thank-you');
+});
+
 // MOVED TO HERE FROM BELOW 500 ??
 app.get('/ls-l', function(req, res){
    var dir = req.query.dirname;
    var os_command = 'ls -l ' + dir; 
    res.set('Content-Type','text/html');
-   var myText = '<html><body><p>The child process has been requested.</p></body></html>';
+   var myText = '<html><body><p>The child process has been requested. Check the console.</p></body></html>';
    res.send(myText);
    console.log(os_command);
    childproc.execProc(os_command);
