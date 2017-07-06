@@ -10,8 +10,9 @@ app.locals.email = 'moored7@nationwide.com';
 app.locals.poopie = 'POOPIE';
 // INCLUDE LIBRARY MODULES HERE
 var fortune = require('./lib/fortune.js');
-var showroute = require('./lib/showroute.js');
+var showpath = require('./lib/showpath.js');
 var childproc = require('./lib/childprocess.js');
+var childexec = require('./lib/childexecsync.js');
 var util = require('util');
 // FORM PROCESSING WITH BODY-PARSER
 app.use(require('body-parser').urlencoded({ extended: true }));
@@ -49,13 +50,13 @@ app.get('/headers', function(req,res){
 
 app.get('/params', function(req,res){
    res.set('Content-Type','text/plain');
-   var s = '';
+   var s = 'TOP NOTCH PARAMETER PARSING: \n';
    for(var name in req.params) s += name + ': ' + req.headers[name] + '\n';
    res.send(s);
 });
 
 app.get('/route', function(req,res){
-   res.render('route', { showroute: showroute.getRoute(res)});
+   res.render('route', { showpath: showpath.getRoute(req)});
 });
 
 //NEWSLETTER FORM PROCESSING
@@ -77,7 +78,7 @@ app.post('/process', function(req, res){
    res.redirect(303, '/thank-you');
 });
 
-// MOVED TO HERE FROM BELOW 500 ??
+// A TEST FUNCTION FOR OPERATING SYSTEM COMMANDS
 app.get('/ls-l', function(req, res){
    var dir = req.query.dirname;
    var os_command = 'ls -l ' + dir; 
@@ -88,8 +89,22 @@ app.get('/ls-l', function(req, res){
    childproc.execProc(os_command);
 });
 
+//A TEST FUNCTION FOR OPERATING SYSTEM COMMANDS
+app.get('/lsout', function(req, res){
+   var dir = req.query.dirname;
+   var os_command = 'ls -l ' + dir; 
+   res.set('Content-Type','text/html');
+   var myText = '<html><body><p>The child process has been requested. Check the console.</p>';
+   console.log(os_command);
+   var output = childexec.execProc(os_command);
+   myText += '<p>RETURNED: ' + output + '</p>'
+   myText += '</body></html>';
+   res.send(myText);
+});
+
 // custom 404 page
 app.use(function(req, res){
+        console.log("NOT FOUND: " + req.path)
         res.status(404);
         res.render('404');
 });
@@ -106,4 +121,3 @@ app.listen(app.get('port'), function(){
   console.log( 'Express started on http://localhost:' +
     app.get('port') + '; press Ctrl-C to terminate.' );
 });
-
