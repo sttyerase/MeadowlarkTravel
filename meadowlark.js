@@ -12,7 +12,7 @@ app.locals.poopie = 'POOPIE';
 var fortune = require('./lib/fortune.js');
 var showpath = require('./lib/showpath.js');
 var childproc = require('./lib/childprocess.js');
-var childexec = require('./lib/childexecsync.js');
+var childsync = require('./lib/childexecsync.js');
 var util = require('util');
 // FORM PROCESSING WITH BODY-PARSER
 app.use(require('body-parser').urlencoded({ extended: true }));
@@ -93,12 +93,12 @@ app.get('/ls-l', function(req, res){
 app.get('/lsout', function(req, res){
    var dir = req.query.dirname;
    var os_command = 'ls -l ' + dir; 
-   res.set('Content-Type','text/html');
-   var myText = '<html><body><p>The child process has been requested. Check the console.</p>';
+   res.set('Content-Type','text/plain');
+   var myText = 'The child process has been requested.\n';
    console.log(os_command);
-   var output = childexec.execProc(os_command);
-   myText += '<p>RETURNED: ' + output + '</p>'
-   myText += '</body></html>';
+   var output = childsync.execProc(os_command);
+   myText += 'RETURNED: \n' + output + '\n'
+   myText += 'THE END';
    res.send(myText);
 });
 
