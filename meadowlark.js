@@ -5,7 +5,7 @@ app.disable('x-powered-by');  // DISABLE RESPONSE HEADER INFO
 app.set('port', process.env.PORT || 8181);
 app.set('views', path.join(__dirname,'views/layouts'));
 app.locals.title = 'MEADOWLARK Travel SERVICE';
-app.locals.email = 'moored7@nationwide.com';
+app.locals.email = 'dbmi@techie.com';
 // app.locals.strftime = require('strftime');
 app.locals.poopie = 'POOPIE';
 // INCLUDE LIBRARY MODULES HERE
