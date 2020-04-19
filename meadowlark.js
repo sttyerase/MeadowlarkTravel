@@ -7,7 +7,6 @@ app.set('views', path.join(__dirname,'views/layouts'));
 app.locals.title = 'MEADOWLARK Travel SERVICE';
 app.locals.email = 'dbmi@techie.com';
 // app.locals.strftime = require('strftime');
-app.locals.poopie = 'POOPIE';
 // INCLUDE LIBRARY MODULES HERE
 var fortune = require('./lib/fortune.js');
 var showpath = require('./lib/showpath.js');
@@ -18,7 +17,7 @@ var util = require('util');
 app.use(require('body-parser').urlencoded({ extended: true }));
 
 // set up handlebars view engine
-var handlebars = require('express-handlebars').create({ defaultLayout:'main' });
+var handlebars = require('express-handlebars').create({ defaultLayout:'main', layoutsDir:"views/layouts" });
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
