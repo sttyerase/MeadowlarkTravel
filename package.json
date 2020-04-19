@@ -1,5 +1,5 @@
 {
-  "name": "MeadowlarkTravel",
+  "name": "Meadowlark Travel",
   "version": "0.0.0",
   "description": "Generated with Eclipse npm Tools",
   "main": "meadowlark.js",
@@ -27,6 +27,6 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^2.5.3"
+    "mocha": "^7.1.1"
   }
 }

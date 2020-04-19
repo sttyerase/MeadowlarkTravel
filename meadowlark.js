@@ -17,7 +17,7 @@ var util = require('util');
 app.use(require('body-parser').urlencoded({ extended: true }));
 
 // set up handlebars view engine
-var handlebars = require('express-handlebars').create({ defaultLayout:'main' });
+var handlebars = require('express-handlebars').create({ defaultLayout:'main', layoutsDir:"views/layouts" });
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
